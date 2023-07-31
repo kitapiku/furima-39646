@@ -57,6 +57,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password should be in mixed alphanumeric characters')
       end
+      it '全角文字を含むパスワードでは登録できない' do
+        @user.password = 'Ｂcde1234'
+        @user.password_confirmation = 'Ｂcde1234'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password should be in mixed alphanumeric characters")
+      end
       it 'パスワードとパスワード(確認)が一致しないと登録できない' do
         @user.password = 'abcdef1'
         @user.password_confirmation = 'abcdef2'
