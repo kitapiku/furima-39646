@@ -4,11 +4,18 @@ function calcItemPrice() {
     const itemPrice = parseFloat(priceInput.value);
     if (isNaN(itemPrice)) {
       const addTaxPrice = document.getElementById("add-tax-price");
+      const addProfit = document.getElementById("profit");
       addTaxPrice.innerHTML = "";
+      addProfit.innerHTML = "";
     } else {
       let taxPrice = itemPrice * 0.1;
+      taxPrice = Math.floor(taxPrice);
+      let profit = itemPrice - taxPrice;
+      profit = Math.floor(profit);
       const addTaxPrice = document.getElementById("add-tax-price");
+      const addProfit = document.getElementById("profit");
       addTaxPrice.innerHTML = `${taxPrice}`;
+      addProfit.innerHTML = `${profit}`;
     }
   });
 };
