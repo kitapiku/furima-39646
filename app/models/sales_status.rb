@@ -6,7 +6,7 @@ class SalesStatus < ActiveHash::Base
     { id: 4, sales_status: '目立った傷や汚れなし' },
     { id: 5, sales_status: 'やや傷や汚れあり' },
     { id: 6, sales_status: '傷や汚れあり' },
-    { id: 7, sales_status: '全体的に状態が悪い' },
+    { id: 7, sales_status: '全体的に状態が悪い' }
   ]
 
   include ActiveHash::Associations
