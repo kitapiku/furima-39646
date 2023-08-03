@@ -131,7 +131,7 @@
       <% if @items.any? %>
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to "#" do %> <%# item詳細へのリンク %>
+            <%= link_to item_path(item.id) do %> <%# item詳細へのリンク %>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
 
