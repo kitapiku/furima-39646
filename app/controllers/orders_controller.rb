@@ -13,6 +13,8 @@ class OrdersController < ApplicationController
     @order_shipping_address = OrderShippingAddress.new(order_shipping_address_params)
     if @order_shipping_address.valid?
       @order_shipping_address.purchase
+      @item.sold = true
+      @item.save
       pay_item
       redirect_to root_path
     else
@@ -25,7 +27,7 @@ class OrdersController < ApplicationController
   def order_shipping_address_params
     params.require(:order_shipping_address)
           .permit(:post_code, :prefecture_id, :municipalities, :address, :building, :phone_number, :order_id)
-          .merge(user_id: current_user.id, item_id: params[:item_id])
+          .merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item
@@ -38,7 +40,7 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    if current_user == @item.user
+    if current_user == @item.user || @item.sold
       redirect_to root_path
     end
   end
