@@ -1,6 +1,6 @@
 class OrderShippingAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalities, :address, :building, :phone_number 
+  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalities, :address, :building, :phone_number , :token
 
   with_options presence: true do
     validates :user_id
@@ -10,11 +10,12 @@ class OrderShippingAddress
     validates :municipalities
     validates :address
     validates :phone_number, numericality: { only_integer: true }, length: { in: 10..11 }
+    validates :token
   end
 
   def purchase
     order = Order.create(user_id: user_id, item_id: item_id)
-    ShippingAaddress.create(post_code: post_code,
+    ShippingAddress.create(post_code: post_code,
                             prefecture_id: prefecture_id,
                             municipalities: municipalities,
                             address: address,
