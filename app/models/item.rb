@@ -19,4 +19,5 @@ class Item < ApplicationRecord
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :schedule_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :sales_status_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :sold, inclusion: { in: [true, false] }
 end
