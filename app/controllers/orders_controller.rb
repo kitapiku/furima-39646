@@ -2,9 +2,9 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
     move_to_index
-    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_shipping_address = OrderShippingAddress.new
   end
 
@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
       pay_item
       redirect_to root_path
     else
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render :index, status: :unprocessable_entity
     end
   end
