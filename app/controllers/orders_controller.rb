@@ -1,15 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_set
+  before_action :move_to_index
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @item = Item.find(params[:item_id])
-    move_to_index
     @order_shipping_address = OrderShippingAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_shipping_address = OrderShippingAddress.new(order_shipping_address_params)
     if @order_shipping_address.valid?
       @order_shipping_address.purchase
@@ -27,7 +26,7 @@ class OrdersController < ApplicationController
 
   def order_shipping_address_params
     params.require(:order_shipping_address)
-          .permit(:post_code, :prefecture_id, :municipalities, :address, :building, :phone_number, :order_id)
+          .permit(:post_code, :prefecture_id, :municipalities, :address, :building, :phone_number)
           .merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
@@ -38,6 +37,10 @@ class OrdersController < ApplicationController
       card: params[:token],
       currency: 'jpy'
     )
+  end
+
+  def item_set
+    @item = Item.find(params[:item_id])
   end
 
   def move_to_index

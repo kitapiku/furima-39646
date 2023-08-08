@@ -5,9 +5,8 @@ RSpec.describe OrderShippingAddress, type: :model do
     before do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
-      order = FactoryBot.create(:order)
       sleep 0.1
-      @order_shipping_address = FactoryBot.build(:order_shipping_address, order_id: order.id, user_id: user.id, item_id: item.id)
+      @order_shipping_address = FactoryBot.build(:order_shipping_address, user_id: user.id, item_id: item.id)
     end
     context '購入ができる場合' do
       it '必要な値が全て正しく入力されていれば購入できる' do
@@ -68,17 +67,33 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("Phone number can't be blank")
       end
-      it '電話番号は10桁以上11桁以内の半角数値じゃないと購入できない' do
+      it '電話番号が10桁以下だと購入できない' do
         @order_shipping_address.phone_number = '123456789'
         sleep 0.1
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
       end
+      it '電話番号が12桁以下だと購入できない' do
+        @order_shipping_address.phone_number = '123456789012'
+        sleep 0.1
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      end
       it '電話番号にハイフンが入っていると登録できない' do
         @order_shipping_address.phone_number = '090-1234-5678'
         sleep 0.1
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include()"Phone number is not a number", "Phone number is too long (maximum is 11 characters)")
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number is not a number", "Phone number is too long (maximum is 11 characters)")
+      end
+      it 'userが紐づいていないと登録できない' do
+        @order_shipping_address.user_id = nil
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐づいていないと登録できない' do
+        @order_shipping_address.item_id = nil
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
