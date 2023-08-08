@@ -35,13 +35,13 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.post_code = '1234-567'
         sleep 0.1
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+        expect(@order_shipping_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
       it '郵便番号はハイフンが含まれないと購入できない' do
         @order_shipping_address.post_code = '1234567'
         sleep 0.1
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+        expect(@order_shipping_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
       it '都道府県が選択されてないと購入できない' do
         @order_shipping_address.prefecture_id = 1
@@ -71,19 +71,20 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.phone_number = '123456789'
         sleep 0.1
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+        expect(@order_shipping_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
       it '電話番号が12桁以下だと購入できない' do
         @order_shipping_address.phone_number = '123456789012'
         sleep 0.1
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@order_shipping_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
       it '電話番号にハイフンが入っていると登録できない' do
         @order_shipping_address.phone_number = '090-1234-5678'
         sleep 0.1
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number is not a number", "Phone number is too long (maximum is 11 characters)")
+        expect(@order_shipping_address.errors.full_messages).to include('Phone number is not a number',
+                                                                        'Phone number is too long (maximum is 11 characters)')
       end
       it 'userが紐づいていないと登録できない' do
         @order_shipping_address.user_id = nil

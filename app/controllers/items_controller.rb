@@ -26,9 +26,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.sold
-      redirect_to action: :index
-    end
+    return unless @item.sold
+
+    redirect_to action: :index
   end
 
   def update
