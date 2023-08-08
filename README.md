@@ -26,6 +26,7 @@
 | schedule_id            | integer    | null: false                    |
 | sales_status_id        | integer    | null: false                    |
 | user                   | references | null: false, foreign_key: true |
+| sold                   | boolean    | null: false                    |
 ### Association
 - belongs_to :user
 - has_one :order
