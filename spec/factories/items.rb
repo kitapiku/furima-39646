@@ -8,6 +8,7 @@ FactoryBot.define do
     prefecture_id          { rand(2..48) }
     schedule_id            { rand(2..4) }
     sales_status_id        { rand(2..7) }
+    sold                   { false }
     association :user
 
     after(:build) do |item|
