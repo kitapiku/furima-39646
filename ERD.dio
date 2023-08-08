@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="MtsNZLjHgh-SmM-HbRW-" name="ページ1">
-        <mxGraphModel dx="1136" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1136" dy="779" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -11,10 +11,10 @@
                     <mxGeometry y="30" width="160" height="121" as="geometry"/>
                 </mxCell>
                 <mxCell id="5" value="Items" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
-                    <mxGeometry x="390" y="84.5" width="160" height="180" as="geometry"/>
+                    <mxGeometry x="390" y="76.75" width="160" height="195.5" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="name&#10;explanation&#10;category&#10;status&#10;price&#10;shipping_fee_status&#10;prefecture&#10;schedule&#10;salse_status&#10;user" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="5" vertex="1">
-                    <mxGeometry y="30" width="160" height="150" as="geometry"/>
+                <mxCell id="6" value="name&#10;explanation&#10;category&#10;status&#10;price&#10;shipping_fee_status&#10;prefecture&#10;schedule&#10;salse_status&#10;sold&#10;user" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="5" vertex="1">
+                    <mxGeometry y="30" width="160" height="165.5" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="Shipping_addresses" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
                     <mxGeometry x="390" y="300" width="160" height="140" as="geometry"/>
