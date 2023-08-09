@@ -6,11 +6,11 @@ class OrderShippingAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'はハイフンを含めて入力してください' }
+    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'が不正です。ハイフンを含めて入力してください' }
     validates :prefecture_id, numericality: { other_than: 1, message: 'を入力してください' }
     validates :municipalities
     validates :address
-    validates :phone_number, numericality: { only_integer: true }, length: { in: 10..11 }
+    validates :phone_number, numericality: { only_integer: true, message: 'は数字で入力し、ハイフンを含めないでください' }, length: { in: 10..11 }
     validates :token
   end
 
