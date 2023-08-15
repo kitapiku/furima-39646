@@ -5,14 +5,23 @@
     <h2 class="name">
       <%= @item.name %>
     </h2>
+    <% if @item.sold %>
     <div class="item-img-content">
-      <%= image_tag @item.image ,class:"item-box-img" %>
-      <% if @item.sold %>
+      <%= image_tag @item.images[0] ,class:"item-box-img" %>
         <div class="sold-out">
           <span>Sold Out!!</span>
         </div>
-      <% end %>
     </div>
+    <% else %>
+    <div class="item-img-content">
+      <%= image_tag @item.images[0] ,class:"item-box-img" %>
+      <div class="item-box-other-imgs">
+        <% @item.images[1..-1].each do |image| %>
+          <%= image_tag image, class:"item-box-other-img" %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
     <div class="item-price-box">
       <span class="item-price">
         ¥ <%= @item.price %>
