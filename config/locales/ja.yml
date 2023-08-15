@@ -9,7 +9,7 @@ ja:
         last_kananame: 名前(カナ)
         birthday: 誕生日
       item:
-        image: 商品画像
+        images: 商品画像
         name: 商品名
         explanation: 商品の説明
         category_id: カテゴリー
