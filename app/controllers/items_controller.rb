@@ -9,6 +9,8 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @categories = Category.new
+    @maincategories = Category.all.order("id ASC").limit(13)
   end
 
   def create
@@ -50,7 +52,7 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :explanation, :category_id, :price, :shipping_fee_status_id,
-                                 :prefecture_id, :schedule_id, :sales_status_id, {images: []}).merge(user_id: current_user.id)
+                                 :prefecture_id, :schedule_id, :sales_status_id, { images: [] }).merge(user_id: current_user.id)
   end
 
   def set_item
