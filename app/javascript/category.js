@@ -24,6 +24,7 @@ window.addEventListener('turbo:load', function () {
       const childItems = XHR.response.item;
       appendChildSelect(childItems)
       const childCategory = document.getElementById('child-select')
+      getGrandChildCategoryData(childCategory)
 
       //子カテゴリーの変化によって孫カテゴリー選択フォームを表示する
       childCategory.addEventListener('change', () => {
@@ -68,6 +69,8 @@ window.addEventListener('turbo:load', function () {
     const childWrap = document.getElementById('child-select-wrap')
     const grandChildWrap = document.createElement('div')
     const grandChildSelect = document.createElement('select')
+    grandChildWrap.setAttribute('id', 'grand-child-select-wrap')
+    grandChildSelect.setAttribute('id', 'grand-child-select')
     grandChildSelect.setAttribute('class', 'select-box')
 
     items.forEach(item => {

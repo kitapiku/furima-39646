@@ -31,6 +31,8 @@ class ItemsController < ApplicationController
     return unless @item.sold
 
     redirect_to action: :index
+    @categories = Category.new
+    @maincategories = Category.all.order("id ASC").limit(13)
   end
 
   def update
@@ -51,7 +53,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :explanation, :category_id, :price, :shipping_fee_status_id,
+    params.require(:item).permit(:name, :explanation, :ancestry, :price, :shipping_fee_status_id,
                                  :prefecture_id, :schedule_id, :sales_status_id, { images: [] }).merge(user_id: current_user.id)
   end
 
