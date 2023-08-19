@@ -5,7 +5,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, url: items_path, local: true do |f| %>
+    <%= form_with model: @item, id: 'form', url: items_path, local: true do |f| %>
 
       <%= render 'shared/error_messages', model: f.object %>
 
@@ -43,7 +43,12 @@
           <span class="indispensable">必須</span>
         </div>
         <div id="select-wrap">
-          <%= f.collection_select(:ancestry, @maincategories, :id, :name, {include_blank: "---"}, {class:"select-box", id:"parent-category"}) %>
+          <select class="select-box" id="parent-category">
+            <option value="">---</option>
+            <% @maincategories.each do |category| %>
+              <option value="<%= category.id %>"><%= category.name %></option>
+            <% end %>
+          </select>
         </div>
         <div class="weight-bold-text">
           商品の状態
@@ -126,7 +131,7 @@
     </div>
     <%# /注意書き %>
     <div class="sell-btn-contents">
-      <%= f.submit "出品する" ,class:"sell-btn" %>
+      <%= f.submit "出品する" ,class:"sell-btn", id:"submit-btn" %>
       <%=link_to 'もどる', root_path, class:"back-btn" %>
     </div>
   </div>
