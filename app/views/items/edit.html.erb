@@ -7,7 +7,7 @@ app/assets/stylesheets/items/new.css %>
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, url: item_path, method: :patch, local: true do |f| %>
+    <%= form_with model: @item, id: 'form', url: item_path, method: :patch, local: true do |f| %>
 
       <%= render 'shared/error_messages', model: f.object %>
 
@@ -43,7 +43,22 @@ app/assets/stylesheets/items/new.css %>
           カテゴリー
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:category_id, Category.all, :id, :category, { selected: @item.category.id }, {class:"select-box", id:"item-category"}) %>
+        <div id="select-wrap">
+          <select class="select-box" id="parent-category">
+            <option value="">---</option>
+            <% @maincategories.each do |category| %>
+              <% if category.id == @parent_category.id %>
+                <option value="<%= category.id %>" selected><%= category.name %></option>
+              <% else %>
+                <option value="<%= category.id %>"><%= category.name %></option>
+              <% end %>
+            <% end %>
+          </select>
+          <div id="category-data"
+            data-grandchild-id="<%= @grandchild_category.id %>"
+            data-child-id="<%= @child_category.id %>">
+          </div>
+        </div>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
@@ -125,7 +140,7 @@ app/assets/stylesheets/items/new.css %>
     </div>
     <%# /注意書き %>
     <div class="sell-btn-contents">
-      <%= f.submit "変更する" ,class:"sell-btn" %>
+      <%= f.submit "変更する" ,class:"sell-btn", id:"submit-btn" %>
       <%=link_to 'もどる', item_path(@item.id), class:"back-btn" %>
     </div>
   </div>
