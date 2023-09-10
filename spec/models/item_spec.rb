@@ -28,7 +28,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('商品の説明を入力してください')
       end
       it 'カテゴリー情報が未選択だと出品できない' do
-        @item.category_id = 1
+        @item.category_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include('カテゴリーを入力してください')
       end
